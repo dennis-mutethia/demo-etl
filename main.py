@@ -14,6 +14,12 @@ from utils.betika import Betika
 from utils.database import async_session, init_db
 from utils.models import Matches
 
+# Global logging configuration (applies to all modules)
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'  # Optional: Custom date format (e.g., 2025-11-04 22:13:45)
+)
 logger = logging.getLogger(__name__)
 
 @asynccontextmanager
@@ -40,6 +46,8 @@ app.include_router(matches.router)
 @app.get("/", include_in_schema=False)
 async def root():
     return RedirectResponse("/docs")
+
+
 
 async def main():
     betika = Betika()
@@ -77,7 +85,7 @@ async def main():
         async with async_session() as session:
             await session.execute(stmt)
             await session.commit()
-            logger.log("Processed `%s` matches", total)
+            logger.info("Processed `%s` matches", total)
     
     except Exception as err:
         logger.error(err)

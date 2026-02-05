@@ -28,6 +28,6 @@ jobs:
       - name: execute main script 
         env:
             DATABASE_URL: ${{ secrets.DATABASE_URL }} 
-            API_BASE_URL_: ${{ secrets.DATABASE_URL }} 
+            API_BASE_URL: ${{ secrets.API_BASE_URL }} 
         run: python main.py
       

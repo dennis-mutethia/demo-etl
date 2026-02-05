@@ -37,6 +37,8 @@ class Betika():
         except Exception as err:
             logger.error("Unexpected error: %s", err)
         
+        return None
+        
     def post_data(self, url, payload):
         try:
             # Sending the POST request
@@ -53,15 +55,21 @@ class Betika():
             logger.error("An error occurred: %s", req_err)
         except Exception as err:
             logger.error("Unexpected error: %s", err)
+        
+        return None
 
     def get_upcoming_matches(self, limit=1000, page=1):
         url = f'{self.base_url}/v1/uo/matches?sport_id=14&sort_id=1&esports=false&is_srl=false&limit={limit}&page={page}'
         response = self.get_data(url)
-        total = int(response.get('meta').get('total'))
-        current_page = int(response.get('meta').get('current_page'))
-        page = current_page + 1
+        
+        if response:
+            total = int(response.get('meta').get('total'))
+            current_page = int(response.get('meta').get('current_page'))
+            page = current_page + 1
 
-        return total, page, response.get('data')
+            return total, page, response.get('data')
+        else:
+            return 0, 0, []
     
     
     def get_match_details(self, parent_match_id, live=False):
