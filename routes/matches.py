@@ -17,7 +17,7 @@ async def get_matches(
     session: AsyncSession = Depends(get_session)
 ):
     statement = (
-        select(Matches)
+        select(Matches).order_by(Matches.start_time)
     )
 
     result = await session.execute(statement)
