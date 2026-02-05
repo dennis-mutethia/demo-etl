@@ -1,5 +1,5 @@
-from typing import Optional
-from datetime import date, datetime
+
+from datetime import datetime
 from sqlmodel import SQLModel, Field
 
 class Matches(SQLModel, table=True):

@@ -2,8 +2,9 @@
 import json
 import logging
 import os
-from dotenv import load_dotenv
 import requests
+
+from dotenv import load_dotenv
 
 logger = logging.getLogger(__name__)
 
@@ -11,7 +12,7 @@ logger = logging.getLogger(__name__)
 class Betika():
     def __init__(self):
         load_dotenv() 
-        self.base_url = os.getenv("API_BASE_URL_")
+        self.base_url = os.getenv("API_BASE_URL")
         
         self.headers = {
             "Content-Type": "application/json",
